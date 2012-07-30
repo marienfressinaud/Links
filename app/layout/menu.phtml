@@ -1,0 +1,5 @@
+<ul>
+	<li <?php if (Request::actionName () == 'index') { echo 'class="active"'; } ?>>
+		<a href="<?php echo Url::display (array ('a' => 'index')); ?>"><?php echo Translate::t ('see links'); ?></a>
+	</li>
+</ul>

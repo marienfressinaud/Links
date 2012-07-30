@@ -1,0 +1,170 @@
+* {
+	margin: 0; padding: 0;
+	font-family: Cantarell; font-size: 100%;
+	}
+html, body {
+	height: 100%; overflow: hidden;
+	}
+
+ul {
+	list-style: none;
+	}
+	ul li > * {
+		display: inline-block; min-height: 20px; width: 90%; padding: 15px 5%;
+		color: #000; text-decoration: none; line-height: 20px; vertical-align: top; word-wrap: break-word;
+		}
+	ul li.event > * {
+		background: url("img/event.png") no-repeat 10px center;
+		}
+	ul li.reminder > * {
+		background: url("img/reminder.png") no-repeat 10px center;
+		}
+	ul li.today > * {
+		background-color: #eee;
+		}
+	ul li.delay > * {
+		background-color: #fdd;
+		}
+	ul li.active > * {
+		background-color: #4499dd !important; color: #fff;
+		}
+	ul li.disable > * {
+		background-color: #eee !important; color: #666; opacity: 0.5;
+		}
+	ul li:hover > * {
+		background-color: #ddd;
+		}
+		ul li.delay:hover > * {
+			background-color: #ecc;
+			}
+
+h2 {
+	display: inline-block; min-height: 20px; width: 90%; padding: 15px 5%;
+	background: #aaa; color: #fff; font-weight: bold; text-align: center; line-height: 20px; vertical-align: top; word-wrap: break-word;
+	}
+
+form {
+	padding: 0; min-width: 300px;
+	text-align: center;
+	}
+	form * {
+		display: inline-block; width: 40%; margin: 2px 0; min-height: 46px;
+		vertical-align: middle; line-height: 46px;
+		}
+		form br {
+			display: block;
+			}
+		label {
+			color: #666; font-weight: bold; text-align: right;
+			}
+			label.for_checkbox {
+				width: 50%; padding: 0 0 0 10px;
+				text-align: left;
+				}
+		input, textarea {
+			min-height: 44px;
+			background: #fff; color: #666; border: 1px solid #aaa; border-radius: 3px; line-height: 44px;
+			}
+			input[type="submit"] {
+				background: url("img/backSubmit.png") repeat-x center; color: #000; font-weight: bold; cursor: pointer; box-shadow: 1px 1px 2px #cfcfcf;
+				}
+			input[type="checkbox"] {
+				width: 15px; min-height: 15px;
+				border: none;
+				}
+			textarea {
+				min-height: 100px;
+				line-height: 120%;
+				}
+		select {
+			width: 41%; min-height: 0;
+			}
+			select.multi {
+				height: 150px;
+				background: #fff; border: 1px solid #aaa; border-radius: 3px;
+				
+				}
+			select option {
+				display: block; width: 100%; min-height: 25px; margin: 0; padding: 2px 5px;
+				background: #fff;
+				}
+		a.button {
+			min-height: 44px;
+			font-weight: bold; box-shadow: 1px 1px 2px #cfcfcf; text-align: center; text-decoration: none; border-radius: 3px; border: 1px solid #aaa; line-height: 44px;
+			}
+			a.button.delete {
+				background: url("img/backDelete.png") repeat-x center; color: #fff;
+				}
+			a.button.submit {
+				background: url("img/backSubmit.png") repeat-x center; color: #000;
+				}
+		form .info {
+			padding: 0 0 0 10px;
+			text-align: left;
+			}
+	:-moz-placeholder {
+		color: #aaa; font-style: italic;
+		}
+
+#global {
+	display: table; width: 100%; height: 100%;
+	}
+	#menu {
+		display: table-cell; width: 20%;
+		background: #eee; border-right: 1px solid #999; vertical-align: top;
+		}
+		#addLinkMenu form {
+			display: table; width: 100%; height: 49px; padding: 0;
+			background: #eee; text-align: center; border-bottom: 1px solid #aaa;
+			}
+			#addLinkMenu input {
+				display: table-cell; height: 49px; margin: 0; padding: 0;
+				border: none; border-radius: 0;
+				}
+				#addLinkMenu input[type="url"] {
+					width: 80%;
+					}
+				#addLinkMenu input[type="submit"] {
+					width: 20%;
+					background: #ddd; cursor: pointer; box-shadow: none;
+					}
+	#content {
+		display: table-cell; width: 100%; height: 100%;
+		vertical-align: top;
+		}
+		#panel {
+			display: table; height: 100%; width: 100%;
+			}
+			#panel .nothing {
+				display: table-cell; width: 100%;
+				background: #f9f9f9; text-align: center; vertical-align: middle;
+				}
+			#listLinks {
+				display: table-cell; width: 50%;
+				background: #f9f9f9; border-right: 1px solid #999;
+				}
+				#listLinks .line {
+					display: table; height: 50%; width: 100%;
+					}
+					#listLinks .line .cell {
+						display: table-cell; width: 100%;
+						}
+						#listLinks .line .cell ul {
+							overflow: auto;
+							}
+			#options {
+				display: table-cell; width: 25%;
+				background: #f9f9f9; border-right: 1px solid #999;
+				}
+			#configuration {
+				display: table-cell; width: 50%;
+				background: #fff;
+				}
+
+span.date {
+	color: #999; font-size: 80%; line-height: 15px;
+	}
+span a.delete {
+	display: inline-block; width: 20px; float: right;
+	background: url("img/delete.png") center center no-repeat; color: #000; text-decoration: none;
+	}

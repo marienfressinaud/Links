@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<link rel="icon" type="image/ico" href="<?php echo Url::display ('/favicon.ico'); ?>" />
+		<?php echo self::headTitle(); ?>
+		<?php echo self::headStyle(); ?>
+		<?php echo self::headScript(); ?>
+	</head>
+	<body>
+
+<div id="global">
+	<div id="menu">
+		<div id="addLinkMenu">
+			<form method="post" action="">
+				<input type="url" name="url" placeholder="<?php echo Translate::t ('add link'); ?>" />
+				<input type="submit" value="+" />
+			</form>
+		</div>
+<?php $this->partial ('menu'); ?>
+	</div>
+	
+	<div id="content">
+<?php $this->render (); ?>
+	</div>
+</div>
+
+	</body>
+</html>

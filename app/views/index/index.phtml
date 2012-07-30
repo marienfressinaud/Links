@@ -1,0 +1,13 @@
+<div id="panel">
+	<?php if (!empty ($this->links)) { ?>
+	<div id="listLinks">
+		<ul>
+			<?php foreach ($this->links as $link) { ?>
+			<li><a href="<?php echo $link->url (); ?>"><?php echo $link->url (); ?></a></li>
+			<?php } ?>
+		</ul>
+	</div>
+	<?php } else { ?>
+	<div class="nothing"><?php echo Translate::t ('no link'); ?></div>
+	<?php } ?>
+</div>
