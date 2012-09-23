@@ -1,16 +1,18 @@
 <?php
 
-include_once ('helper/HelperLink.php');
-include_once ('dao/LinkDAO.array.php');
-
 class Link extends Model {
 	private $id;
 	private $title;
 	private $url;
 	private $description;
-	private $private;
 	private $linkdate;
 	private $tags;
+	
+	public function __construct ($url, $desc, $tags) {
+		$this->_url ($url);
+		$this->_description ($desc);
+		$this->_tags ($tags);
+	}
 	
 	public function id () {
 		return $this->id;
@@ -23,9 +25,6 @@ class Link extends Model {
 	}
 	public function description () {
 		return $this->description;
-	}
-	public function priv () {
-		return $this->private;
 	}
 	public function date () {
 		return $this->linkdate;
@@ -46,13 +45,104 @@ class Link extends Model {
 	public function _description ($value) {
 		$this->description = $value;
 	}
-	public function _private ($value) {
-		$this->private = $value;
-	}
 	public function _date ($value) {
 		$this->linkdate = $value;
 	}
 	public function _tags ($value) {
 		$this->tags = $value;
+	}
+	
+	public function loadTitle () {
+		$title = $this->url;
+		
+		if (!empty ($this->url)) {
+			list ($http_status, $headers, $data) = getHTTP ($this->url, 4);
+		
+			if (!empty ($data)) {
+				$title = html_entity_decode (html_extract_title($data), ENT_QUOTES, 'UTF-8');
+			}
+		}
+		
+		$this->_title ($title);
+	}
+}
+
+class LinkDAO extends Model_array {
+	public function __construct () {
+		parent::__construct (PUBLIC_PATH . '/data/links');
+	}
+	
+	public function addLink ($values) {
+		$id = $this->generateKey ();
+		$this->array[$id] = array ();
+		
+		foreach ($values as $key => $value) {
+			$this->array[$id][$key] = $value;
+		}
+		
+		$this->writeFile($this->array);
+	}
+	
+	public function updateLink ($id, $values) {
+		foreach ($values as $key => $value) {
+			$this->array[$id][$key] = $value;
+		}
+		
+		$this->writeFile($this->array);
+	}
+	
+	public function deleteLink ($id) {
+		unset ($this->array[$id]);
+		$this->writeFile($this->array);
+	}
+	
+	public function listLinks () {
+		$list = $this->array;
+		
+		if (!is_array ($list)) {
+			$list = array ();
+		}
+		
+		return HelperLink::listeDaoToLink ($list);
+	}
+	
+	public function searchById ($id) {
+		$link = $this->array[$id];
+		return HelperLink::daoToLink ($link);
+	}
+	
+	private function generateKey () {
+		for ($i = 0; $i <= count ($this->array); $i++) {
+			if (!isset ($this->array[$i])) {
+				return $i;
+			}
+		}
+		
+		return time ();
+	}
+}
+
+class HelperLink {
+	public static function daoToLink ($dao) {
+		$liste = self::listeDaoToLink (array ($dao));
+
+		return $liste[0];
+	}
+
+	public static function listeDaoToLink ($listeDAO) {
+		$liste = array ();
+
+		if (!is_array ($listeDAO)) {
+			$listeDAO = array ($listeDAO);
+		}
+
+		foreach ($listeDAO as $key => $dao) {
+			$liste[$key] = new Link ($dao['url'], $dao['description'], $dao['tags']);
+			$liste[$key]->_id ($key);
+			$liste[$key]->_title ($dao['title']);
+			$liste[$key]->_date ($dao['linkdate']);
+		}
+
+		return $liste;
 	}
 }

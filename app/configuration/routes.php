@@ -13,4 +13,10 @@ return array (
 		'controller' => 'link',
 		'action'     => 'add'
 	),
+	
+	array (
+		'route'      => '/api/ajouter_lien',
+		'controller' => 'api',
+		'action'     => 'add'
+	),
 );

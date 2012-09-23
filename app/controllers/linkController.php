@@ -1,39 +1,70 @@
 <?php
+
+function search_tags ($desc) {
+	$tags = array ();
+	$pos_tag = 0;
+	$pos_fin_tag = 0;
+	
+	do {
+		$pos_tag = strpos ($desc, '#', $pos_fin_tag);
+		
+		if ($pos_tag !== false) {
+			$pos_fin_tag = strpos ($desc, ' ', $pos_tag);
+			
+			if ($pos_fin_tag === false) {
+				$tags[] = substr ($desc, $pos_tag + 1);
+			} else {
+				$tags[] = substr ($desc, $pos_tag + 1, $pos_fin_tag - $pos_tag - 1);
+			}
+		}
+	} while ($pos_fin_tag !== false && $pos_tag !== false);
+	
+	return $tags;
+}
+
+function parse_args ($args) {
+	$url = false;
+	$desc = '';
+	$tags = array ();
+	
+	if ($args !== false && substr ($args, 0, 4) == 'http') {
+		$pos_fin_url = strpos ($args, ' ');
+		if ($pos_fin_url !== false) {
+			$url = substr ($args, 0, $pos_fin_url);
+		
+			$desc = trim (substr ($args, $pos_fin_url));
+			
+			$tags = search_tags ($desc);
+		} else {
+			$url = $args;
+		}
+	}
+
+	return array ($url, $desc, $tags);
+}
   
 class linkController extends ActionController {
 	public function addAction () {
-		//if (Request::isPost ()) {
-			$url = htmlspecialchars (Request::param ('url', ''));
-			$title = htmlspecialchars (Request::param ('title', '')); // TODO supprimer valeur par défaut
-			$desc = htmlspecialchars (Request::param ('description', ''));
-			$tags = htmlspecialchars (Request::param ('tags', ''));
-			$private = Request::param ('private');
+		if (Request::isPost ()) {
+			list ($url, $desc, $tags) = parse_args (htmlspecialchars (Request::param ('url')));
 			
-			if ($title !== false) {
+			if ($url !== false) {
 				$linkDAO = new LinkDAO ();
-				
-				if ($private === false) {
-					$private = 0;
-				} else {
-					$private = 1;
-				}
+				$link = new Link ($url, $desc, $tags);
+				$link->loadTitle ();
 			
 				$values = array (
-					'url' => $url,
-					'title' => $title,
-					'description' => $desc,
-					'private' => $private,
+					'url' => $link->url (),
+					'title' => $link->title (),
+					'description' => $link->description (),
 					'linkdate' => time (),
-					'tags' => $tags
+					'tags' => $link->tags ()
 				);
 			
 				$linkDAO->addLink ($values);
-				
-				$_POST = array ();
-				Request::forward ();
-			} else {
-				$this->view->retour = Translate::t ('title required');
 			}
-		//}
+			
+			Request::forward (array (), true);
+		}
 	}
 }

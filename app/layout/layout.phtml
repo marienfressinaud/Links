@@ -12,15 +12,15 @@
 <div id="global">
 	<div id="menu">
 		<div id="addLinkMenu">
-			<form method="post" action="">
+			<form method="post" action="<?php echo Url::display (array ('c' => 'link', 'a' => 'add')); ?>">
 				<input type="url" name="url" placeholder="<?php echo Translate::t ('add link'); ?>" />
 				<input type="submit" value="+" />
 			</form>
 		</div>
 <?php $this->partial ('menu'); ?>
-	</div>
+	</div><!--
 	
-	<div id="content">
+	--><div id="content">
 <?php $this->render (); ?>
 	</div>
 </div>

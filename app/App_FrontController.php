@@ -10,12 +10,16 @@ class App_FrontController extends FrontController {
 		Session::init ();
 		Translate::init ();
 		
+		$this->initLibs ();
 		$this->initModels ();
 		$this->initView ();
 	}
 	
+	private function initLibs () {
+		include (LIB_PATH . '/../lib_shaarli.php');
+	}
+	
 	private function initModels () {
-		include (APP_PATH . '/../lib/Model_array.php');
 		include (APP_PATH . '/models/Link.php');
 	}
 	
