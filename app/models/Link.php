@@ -26,8 +26,12 @@ class Link extends Model {
 	public function description () {
 		return $this->description;
 	}
-	public function date () {
-		return $this->linkdate;
+	public function date ($format = false) {
+		if ($format) {
+			return date ('d/m/Y', $this->linkdate);
+		} else {
+			return $this->linkdate;
+		}
 	}
 	public function tags () {
 		return $this->tags;
@@ -103,12 +107,12 @@ class LinkDAO extends Model_array {
 			$list = array ();
 		}
 		
-		return HelperLink::listeDaoToLink ($list);
+		return HelperLink::daoToLink ($list);
 	}
 	
 	public function searchById ($id) {
-		$link = $this->array[$id];
-		return HelperLink::daoToLink ($link);
+		$links = HelperLink::daoToLink ($this->array);
+		return $links[$id];
 	}
 	
 	private function generateKey () {
@@ -123,13 +127,7 @@ class LinkDAO extends Model_array {
 }
 
 class HelperLink {
-	public static function daoToLink ($dao) {
-		$liste = self::listeDaoToLink (array ($dao));
-
-		return $liste[0];
-	}
-
-	public static function listeDaoToLink ($listeDAO) {
+	public static function daoToLink ($listeDAO) {
 		$liste = array ();
 
 		if (!is_array ($listeDAO)) {

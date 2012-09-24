@@ -3,7 +3,7 @@
 	<div id="listLinks">
 		<ul>
 			<?php foreach ($this->links as $link) { ?>
-			<li>
+			<li <?php if (isset ($this->link) && $this->link->id () == $link->id ()) { echo 'class="active"'; } ?>>
 				<a target="_blank" href="<?php echo $link->url (); ?>"><?php
 				$title = $link->title ();
 				if (!empty ($title)) {
@@ -13,17 +13,43 @@
 				}
 				?></a>
 				
+				<span class="desc">
+					<a href="<?php echo Url::display (array ('c' => 'link', 'a' => 'update', 'params' => array ('id' => $link->id ()))); ?>">Éditer</a> - 
+					<span class="date">le <?php echo $link->date (true); ?></span>
 				<?php
 				$desc = $link->description ();
 				if (!empty ($desc)) {
-					echo '<span class="desc">' . $desc . '</span>';
+					echo ' - ' . $desc;
 				}
 				?>
+				</span>
 			</li>
 			<?php } ?>
 		</ul>
 	</div>
 	<?php } else { ?>
 	<div class="nothing"><?php echo Translate::t ('no link'); ?></div>
+	<?php } ?>
+	
+	<?php if (isset ($this->link)) { ?>
+	<div class="editLink">
+		<h2>Éditer un lien</h2>
+		<form method="post" action="<?php echo Url::display (array ('c' => 'link', 'a' => 'update', 'params' => array ('id' => $this->link->id ()))); ?>">
+			<label for="title">Titre</label>
+			<input type="text" name="title" id="title" value="<?php echo $this->link->title (); ?>" />
+			
+			<label for="url">URL</label>
+			<input type="url" name="url" id="url" value="<?php echo $this->link->url (); ?>" />
+			
+			<label for="desc">Description</label>
+			<textarea name="desc" id="desc"><?php echo $this->link->description (); ?></textarea>
+			
+			<span class="for_checkbox"><input type="checkbox" name="upDate" id="upDate" value="upDate" /></span>
+			<label for="upDate" class="for_checkbox">Mettre à jour la date</label>
+			
+			<a class="button delete" href="<?php echo Url::display (array ('c' => 'link', 'a' => 'delete', 'params' => array ('id' => $this->link->id ()))); ?>">Supprimer</a>
+			<input type="submit" value="Valider" />
+		</form>
+	</div>
 	<?php } ?>
 </div>

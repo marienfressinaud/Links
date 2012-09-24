@@ -67,4 +67,42 @@ class linkController extends ActionController {
 			Request::forward (array (), true);
 		}
 	}
+	
+	public function updateAction () {
+		$id = Request::param ('id');
+		
+		if ($id !== false) {
+			if (!Request::isPost ()) {
+				Session::_param ('id', $id);
+			} else {
+				$linkDAO = new LinkDAO ();
+				
+				$url = htmlspecialchars (Request::param ('url'));
+				$title = htmlspecialchars (Request::param ('title'));
+				$desc = htmlspecialchars (Request::param ('desc'));
+				$tags = search_tags ($desc);
+				
+				$values = array (
+					'url' => $url,
+					'title' => $title,
+					'description' => $desc,
+					'tags' => $tags
+				);
+				
+				$upDate = Request::param ('upDate');
+				if ($upDate !== false) {
+					$values['linkdate'] = time ();
+				}
+				
+				$linkDAO->updateLink ($id, $values);
+			}
+			
+			Request::forward (array (), true);
+		} else {
+			Error::error (
+				404,
+				array ('error' => array ('La page que vous cherchez n\'existe pas'))
+			);
+		}
+	}
 }

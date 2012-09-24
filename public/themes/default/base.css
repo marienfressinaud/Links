@@ -19,17 +19,17 @@ ul {
 		-moz-transition: all .5s ease-out; -webkit-transition: all .5s ease-out; transition: all .5s ease-out;
 		}
 	ul li.active > * {
-		background-color: #4499dd !important; color: #fff;
+		background-color: #4499dd !important; color: #fff !important;
 		}
 	ul li.disable > * {
-		background-color: #eee !important; color: #666; opacity: 0.5;
+		background-color: #eee !important; color: #666 !important; opacity: 0.5;
 		}
 	ul li:hover > a {
-		background-color: #ddd;
+		color: #666;
 		}
 	ul li > span.desc {
 		width: 80%; padding: 15px 4%; margin: 0 5%;
-		color: #666; background-color: #eee; font-size: 90%; border-left: 5px solid #666;
+		background: #eee; color: #666; font-size: 90%; border-left: 5px solid #666; border-bottom: 1px solid #666; border-radius: 0 0 0 10px;
 		}
 		ul li:hover > span.desc {
 			background-color: #ddd;
@@ -47,10 +47,36 @@ form {
 		display: inline-block; width: 40%; margin: 2px 0; min-height: 46px;
 		vertical-align: middle; line-height: 46px;
 		}
+		form span.for_checkbox {
+			text-align: right;
+			}
+		label {
+			color: #666; font-weight: bold; text-align: right;
+			}
+			label.for_checkbox {
+				text-align: left;
+				}
 		input, textarea {
 			min-height: 44px;
 			background: #fff; color: #666; border: 1px solid #aaa; border-radius: 3px; line-height: 44px;
 			}
+			input[type="submit"] {
+				background: url("img/backSubmit.png") repeat-x center; color: #000; font-weight: bold; cursor: pointer; box-shadow: 1px 1px 2px #cfcfcf;
+				}
+			textarea {
+				min-height: 100px;
+				line-height: 120%;
+				}
+		a.button {
+			min-height: 44px;
+			font-weight: bold; box-shadow: 1px 1px 2px #cfcfcf; text-align: center; text-decoration: none; border-radius: 3px; border: 1px solid #aaa; line-height: 44px;
+			}
+			a.button.delete {
+				background: url("img/backDelete.png") repeat-x center; color: #fff;
+				}
+			a.button.submit {
+				background: url("img/backSubmit.png") repeat-x center; color: #000;
+				}
 	:-moz-placeholder {
 		color: #aaa; font-style: italic;
 		}
@@ -78,13 +104,24 @@ form {
 					background: #ddd; cursor: pointer; font-weight: bold;
 					}
 	#content {
-		display: inline-block; width: 80%; margin: 0 0 0 20%;
+		display: inline-block; width: 80%; height: 100%; margin: 0 0 0 20%;
 		vertical-align: top;
 		}
 		#panel {
 			display: table; height: 100%; width: 100%;
 			}
+			#panel .nothing {
+				display: table-cell; width: 100%;
+				background: #f9f9f9; text-align: center; vertical-align: middle;
+				}
 			#listLinks {
 				display: table-cell; width: 50%;
-				background: #f9f9f9; border-right: 1px solid #999;
+				background: #f9f9f9; border-right: 1px solid #999; vertical-align: top;
 				}
+			#editLink {
+				display: table-cell; width: 50%;
+				background: #fff; vertical-align: top;
+				}
+span.date {
+	font-size: 80%;
+	}

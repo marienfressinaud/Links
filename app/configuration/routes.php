@@ -13,6 +13,12 @@ return array (
 		'controller' => 'link',
 		'action'     => 'add'
 	),
+	array (
+		'route'      => '/modifier_lien\?id=(\d+)',
+		'controller' => 'link',
+		'action'     => 'update',
+		'params'     => array ('id')
+	),
 	
 	array (
 		'route'      => '/api/ajouter_lien',
