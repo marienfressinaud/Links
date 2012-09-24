@@ -68,8 +68,8 @@ form {
 				line-height: 120%;
 				}
 		a.button {
-			min-height: 44px;
-			font-weight: bold; box-shadow: 1px 1px 2px #cfcfcf; text-align: center; text-decoration: none; border-radius: 3px; border: 1px solid #aaa; line-height: 44px;
+			display: inline-block; width: 40%; margin: 2px 0; min-height: 44px;
+			background: #eee; font-weight: bold; box-shadow: 1px 1px 2px #cfcfcf; text-align: center; text-decoration: none; border-radius: 3px; border: 1px solid #aaa; line-height: 44px; vertical-align: middle;
 			}
 			a.button.delete {
 				background: url("img/backDelete.png") repeat-x center; color: #fff;
@@ -121,6 +121,14 @@ form {
 			#editLink {
 				display: table-cell; width: 50%;
 				background: #fff; vertical-align: top;
+				}
+			#options {
+				display: table-cell; width: 25%;
+				background: #f9f9f9; border-right: 1px solid #999;
+				}
+			#configuration {
+				display: table-cell; width: 50%;
+				background: #fff;
 				}
 span.date {
 	font-size: 80%;

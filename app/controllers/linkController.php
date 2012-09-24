@@ -58,7 +58,8 @@ class linkController extends ActionController {
 					'title' => $link->title (),
 					'description' => $link->description (),
 					'linkdate' => time (),
-					'tags' => $link->tags ()
+					'tags' => $link->tags (),
+					'private' => $link->priv ()
 				);
 			
 				$linkDAO->addLink ($values);
@@ -86,7 +87,8 @@ class linkController extends ActionController {
 					'url' => $url,
 					'title' => $title,
 					'description' => $desc,
-					'tags' => $tags
+					'tags' => $tags,
+					'private' => 0
 				);
 				
 				$upDate = Request::param ('upDate');

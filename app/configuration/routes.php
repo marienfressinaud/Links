@@ -6,6 +6,16 @@ return array (
 		'controller' => 'index',
 		'action'     => 'index'
 	),
+	array (
+		'route'      => '/parametrage',
+		'controller' => 'index',
+		'action'     => 'configuration'
+	),
+	array (
+		'route'      => '/datastore.php',
+		'controller' => 'index',
+		'action'     => 'export'
+	),
 	
 	//////////
 	array (
@@ -14,7 +24,7 @@ return array (
 		'action'     => 'add'
 	),
 	array (
-		'route'      => '/modifier_lien\?id=(\d+)',
+		'route'      => '/modifier_lien\?id=(.+)',
 		'controller' => 'link',
 		'action'     => 'update',
 		'params'     => array ('id')

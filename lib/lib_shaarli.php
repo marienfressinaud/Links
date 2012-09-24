@@ -1,5 +1,18 @@
 <?php
 
+define('PHPPREFIX','<?php /* '); // Prefix to encapsulate data in php code.
+define('PHPSUFFIX',' */ ?>'); // Suffix to encapsulate data in php code.
+
+/*  Converts a linkdate time (YYYYMMDD_HHMMSS) of an article to a timestamp (Unix epoch)
+    (used to build the ADD_DATE attribute in Netscape-bookmarks file)
+    PS: I could have used strptime(), but it does not exist on Windows. I'm too kind. */
+function linkdate2timestamp($linkdate)
+{
+    $Y=$M=$D=$h=$m=$s=0;
+    $r = sscanf($linkdate,'%4d%2d%2d_%2d%2d%2d',$Y,$M,$D,$h,$m,$s);
+    return mktime($h,$m,$s,$M,$D,$Y);
+}
+
 // Parse HTTP response headers and return an associative array.
 function http_parse_headers_shaarli( $headers )
 {

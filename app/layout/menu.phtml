@@ -2,4 +2,7 @@
 	<li <?php if (Request::actionName () == 'index') { echo 'class="active"'; } ?>>
 		<a href="<?php echo Url::display (array ('a' => 'index')); ?>"><?php echo Translate::t ('see links'); ?></a>
 	</li>
+	<li <?php if (Request::actionName () == 'configuration') { echo 'class="active"'; } ?>>
+		<a href="<?php echo Url::display (array ('a' => 'configuration')); ?>">Paramétrer</a>
+	</li>
 </ul>

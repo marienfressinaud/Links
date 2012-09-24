@@ -1,0 +1,19 @@
+<div id="panel">
+	<div id="options">
+		<ul>
+			<li class="active"><a href="">Import / Export Shaarli</a></li>
+		</ul>
+	</div>
+
+	<div id="configuration">
+		<h2>Import / Export Shaarli</h2>
+		
+		<a class="button" target="_blank" href="<?php echo Url::display (array ('a' => 'export')); ?>">Exporter en format Shaarli</a>
+		
+		<form method="post" action="" enctype="multipart/form-data">
+			<label for="file">Fichier</label>
+			<input type="file" name="file" id="file" />
+			<input type="submit" value="Charger" />
+		</form>
+	</div>
+</div>

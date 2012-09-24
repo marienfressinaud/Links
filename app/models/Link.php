@@ -7,11 +7,13 @@ class Link extends Model {
 	private $description;
 	private $linkdate;
 	private $tags;
+	private $private;
 	
-	public function __construct ($url, $desc, $tags) {
+	public function __construct ($url, $desc, $tags, $private = 0) {
 		$this->_url ($url);
 		$this->_description ($desc);
 		$this->_tags ($tags);
+		$this->_private ($private);
 	}
 	
 	public function id () {
@@ -28,13 +30,16 @@ class Link extends Model {
 	}
 	public function date ($format = false) {
 		if ($format) {
-			return date ('d/m/Y', $this->linkdate);
+			return date ('d/m/Y', linkdate2timestamp ($this->linkdate));
 		} else {
 			return $this->linkdate;
 		}
 	}
 	public function tags () {
 		return $this->tags;
+	}
+	public function priv () {
+		return $this->private;
 	}
 	
 	public function _id ($id) {
@@ -54,6 +59,9 @@ class Link extends Model {
 	}
 	public function _tags ($value) {
 		$this->tags = $value;
+	}
+	public function _private ($private) {
+		$this->private = $private;
 	}
 	
 	public function loadTitle () {
@@ -77,7 +85,7 @@ class LinkDAO extends Model_array {
 	}
 	
 	public function addLink ($values) {
-		$id = $this->generateKey ();
+		$id = strval (date ('Ymd_His', $values['linkdate']));
 		$this->array[$id] = array ();
 		
 		foreach ($values as $key => $value) {
@@ -114,16 +122,6 @@ class LinkDAO extends Model_array {
 		$links = HelperLink::daoToLink ($this->array);
 		return $links[$id];
 	}
-	
-	private function generateKey () {
-		for ($i = 0; $i <= count ($this->array); $i++) {
-			if (!isset ($this->array[$i])) {
-				return $i;
-			}
-		}
-		
-		return time ();
-	}
 }
 
 class HelperLink {
@@ -139,6 +137,7 @@ class HelperLink {
 			$liste[$key]->_id ($key);
 			$liste[$key]->_title ($dao['title']);
 			$liste[$key]->_date ($dao['linkdate']);
+			$liste[$key]->_private ($dao['private']);
 		}
 
 		return $liste;
