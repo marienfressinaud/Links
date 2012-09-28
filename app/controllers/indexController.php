@@ -3,7 +3,20 @@
 class indexController extends ActionController {
 	public function indexAction () {
 		$linkDAO = new LinkDAO ();
-		$this->view->links = array_reverse ($linkDAO->listLinks ());
+		$links = array_reverse ($linkDAO->listLinks ());
+		
+		//gestion pagination
+		try {
+			$page = Request::param ('page', 1);
+			$this->view->linksPaginator = new Paginator ($links);
+			$this->view->linksPaginator->_nbItemsPerPage (20);
+			$this->view->linksPaginator->_currentPage ($page);
+		} catch (CurrentPagePaginationException $e) {
+			Error::error (
+				404,
+				array ('error' => array ('La page que vous cherchez n\'existe pas'))
+			);
+		}
 		
 		// edit
 		$id = Session::param ('id');

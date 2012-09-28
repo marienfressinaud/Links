@@ -34,6 +34,15 @@ ul {
 		ul li:hover > span.desc {
 			background-color: #ddd;
 			}
+	ul li > span.pagination {
+		background: #eee; text-align: center;
+		}
+		span.pagination a {
+			font-style: italic;
+			}
+		span.pagination span.current-page {
+			font-weight: bold; padding: 0 50px;
+			}
 h2 {
 	display: inline-block; min-height: 20px; width: 90%; padding: 15px 5%;
 	background: #aaa; color: #fff; font-weight: bold; text-align: center; line-height: 20px; vertical-align: top; word-wrap: break-word;

@@ -7,6 +7,12 @@ return array (
 		'action'     => 'index'
 	),
 	array (
+		'route'      => '/\?p=(\d+)',
+		'controller' => 'index',
+		'action'     => 'index',
+		'params'     => array ('page')
+	),
+	array (
 		'route'      => '/parametrage',
 		'controller' => 'index',
 		'action'     => 'configuration'
