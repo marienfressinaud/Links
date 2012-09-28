@@ -85,7 +85,7 @@ class LinkDAO extends Model_array {
 	}
 	
 	public function addLink ($values) {
-		$id = strval (date ('Ymd_His', $values['linkdate']));
+		$id = $values['linkdate'];
 		$this->array[$id] = array ();
 		
 		foreach ($values as $key => $value) {
@@ -108,14 +108,25 @@ class LinkDAO extends Model_array {
 		$this->writeFile($this->array);
 	}
 	
-	public function listLinks () {
+	public function listLinks ($get_private = true) {
 		$list = $this->array;
+		$links = array ();
 		
 		if (!is_array ($list)) {
 			$list = array ();
 		}
 		
-		return HelperLink::daoToLink ($list);
+		if (!$get_private) {
+			foreach ($list as $key => $link) {
+				if (!$link['private']) {
+					$links[$key] = $link;
+				}
+			}
+		} else {
+			$links = $list;
+		}
+		
+		return HelperLink::daoToLink ($links);
 	}
 	
 	public function searchById ($id) {

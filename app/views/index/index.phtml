@@ -16,7 +16,7 @@
 				}
 				?></a>
 				
-				<span class="desc">
+				<span class="desc<?php if ($link->priv ()) { echo ' private'; } ?>">
 					<a href="<?php echo Url::display (array ('c' => 'link', 'a' => 'update', 'params' => array ('id' => $link->id ()))); ?>">Éditer</a> - 
 					<span class="date">le <?php echo $link->date (true); ?></span>
 				<?php
@@ -47,6 +47,9 @@
 			
 			<label for="desc">Description</label>
 			<textarea name="desc" id="desc"><?php echo $this->link->description (); ?></textarea>
+			
+			<span class="for_checkbox"><input type="checkbox" name="private" id="private" value="private" <?php if ($this->link->priv ()) { echo 'checked="checked"'; } ?> /></span>
+			<label for="private" class="for_checkbox">Privé ?</label>
 			
 			<span class="for_checkbox"><input type="checkbox" name="upDate" id="upDate" value="upDate" /></span>
 			<label for="upDate" class="for_checkbox">Mettre à jour la date</label>

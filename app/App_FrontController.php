@@ -16,6 +16,7 @@ class App_FrontController extends FrontController {
 	}
 	
 	private function initLibs () {
+		include (LIB_PATH . '/../lib_links.php');
 		include (LIB_PATH . '/../lib_shaarli.php');
 	}
 	
