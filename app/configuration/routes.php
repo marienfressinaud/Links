@@ -35,6 +35,12 @@ return array (
 		'action'     => 'update',
 		'params'     => array ('id')
 	),
+	array (
+		'route'      => '/supprimer_lien\?id=(.+)',
+		'controller' => 'link',
+		'action'     => 'delete',
+		'params'     => array ('id')
+	),
 	
 	array (
 		'route'      => '/api/ajouter_lien',

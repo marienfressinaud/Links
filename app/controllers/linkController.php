@@ -70,4 +70,15 @@ class linkController extends ActionController {
 			);
 		}
 	}
+	
+	public function deleteAction () {
+		$id = Request::param ('id');
+		
+		if ($id !== false) {
+			$linkDAO = new LinkDAO ();
+			$linkDAO->deleteLink ($id);
+		}
+		
+		Request::forward (array (), true);
+	}
 }
