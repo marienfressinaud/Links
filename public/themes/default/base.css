@@ -75,6 +75,9 @@ form {
 			input[type="submit"] {
 				background: url("img/backSubmit.png") repeat-x center; color: #000; font-weight: bold; cursor: pointer; box-shadow: 1px 1px 2px #cfcfcf;
 				}
+			input[type="file"] {
+				min-height: 20px; margin: 15px;
+				}
 			textarea {
 				min-height: 100px;
 				line-height: 120%;
@@ -140,8 +143,12 @@ form {
 				}
 			#configuration {
 				display: table-cell; width: 50%;
-				background: #fff;
+				background: #fff; text-align: center;
 				}
 span.date {
 	font-size: 80%;
+	}
+div.separator {
+	height: 0px; margin: 25px 0 24px;
+	border-top: 1px solid #aaa;
 	}
