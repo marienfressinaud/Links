@@ -42,9 +42,16 @@ return array (
 		'params'     => array ('id')
 	),
 	
+	//////////
 	array (
 		'route'      => '/api/ajouter_lien',
 		'controller' => 'api',
 		'action'     => 'add'
+	),
+	array (
+		'route'      => '/api/get_(\w+)_links\?format=(\w+)',
+		'controller' => 'api',
+		'action'     => 'getLinks',
+		'params'     => array ('type', 'format')
 	),
 );

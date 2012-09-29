@@ -29,9 +29,7 @@ class indexController extends ActionController {
 	
 	public function configurationAction () {
 		if (Request::isPost ()) {
-			if ($_FILES['file']['error'] == 0
-			 && ($_FILES['file']['type'] == 'application/x-php'
-			  || $_FILES['file']['type'] == 'plain/txt')) {
+			if ($_FILES['file']['error'] == 0) {
 			  	$linkDAO = new LinkDAO ();
 			  	
 				$content = file_get_contents ($_FILES['file']['tmp_name']);
