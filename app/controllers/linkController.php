@@ -56,7 +56,7 @@ class linkController extends ActionController {
 				
 				$upDate = Request::param ('upDate');
 				if ($upDate !== false) {
-					$values['linkdate'] = time ();
+					$values['linkdate'] = date ('Ymd_His', time ());
 				}
 				
 				$linkDAO->updateLink ($id, $values);
