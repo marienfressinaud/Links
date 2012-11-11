@@ -36,6 +36,23 @@ class apiController extends ActionController {
 				$links[$id]['linkdate'] = $link->date ();
 				$links[$id]['tags'] = implode (' ', $link->tags ());
 			}
+		} elseif ($format == 'uniflux') {
+			foreach ($links_tmp as $link) {
+				$id = $link->id ();
+				$links[$id] = array ();
+				$links[$id]['title'] = $link->title ();
+				$links[$id]['content'] = $link->description ();
+				$links[$id]['date'] = $link->date ();
+				$links[$id]['tags'] = $link->tags ();
+				
+				$url = $link->url ();
+				if (!empty ($url)) {
+					$links[$id]['url'] = $url;
+					$links[$id]['type'] = 'url';
+				} else {
+					$links[$id]['type'] = 'status';
+				}
+			}
 		}
 		
 		$this->view->links = $links;
