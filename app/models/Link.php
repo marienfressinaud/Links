@@ -77,6 +77,17 @@ class Link extends Model {
 		
 		$this->_title ($title);
 	}
+	
+	public function toArray () {
+		return array (
+			'url' => $this->url (),
+			'description' => $this->description (),
+			'tags' => $this->tags (),
+			'title' => $this->title (),
+			'linkdate' => $this->date (),
+			'private' => $this->priv ()
+		);
+	}
 }
 
 class LinkDAO extends Model_array {

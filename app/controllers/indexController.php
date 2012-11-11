@@ -57,9 +57,14 @@ class indexController extends ActionController {
 		$linkDAO = new LinkDAO ();
 		$links = $linkDAO->listLinks ();
 		
+		$links_array = array ();
+		foreach ($links as $key => $link) {
+			$links_array[$key] = $link->toArray ();
+		}
+		
 		$this->view->_useLayout (false);
 		
 		header('Content-type: application/x-php');
-		echo PHPPREFIX . base64_encode (gzdeflate (serialize ($links))) . PHPSUFFIX;
+		echo PHPPREFIX . base64_encode (gzdeflate (serialize ($links_array))) . PHPSUFFIX;
 	}
 }

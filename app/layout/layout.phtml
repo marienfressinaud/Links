@@ -10,11 +10,11 @@
 	<body>
 
 <div id="global">
-	<div id="menu">
+	<div id="menu" class="aside">
 		<div id="addLinkMenu">
 			<form method="post" action="<?php echo Url::display (array ('c' => 'link', 'a' => 'add')); ?>">
-				<input type="url" name="url" placeholder="<?php echo Translate::t ('add link'); ?>" />
-				<input type="submit" value="+" />
+				<input type="url" name="url" placeholder="<?php echo Translate::t ('add link'); ?>" /><!--
+				--><input type="submit" value="+" />
 			</form>
 		</div>
 <?php $this->partial ('menu'); ?>

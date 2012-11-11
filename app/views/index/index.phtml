@@ -6,7 +6,8 @@
 		<ul>
 			<li><?php $this->linksPaginator->render ('pagination.phtml', 'page'); ?></li>
 			<?php foreach ($links as $link) { ?>
-			<li <?php if (isset ($this->link) && $this->link->id () == $link->id ()) { echo 'class="active"'; } ?>>
+			<?php $active = isset ($this->link) && $this->link->id () == $link->id (); ?>
+			<li <?php if ($active) { echo 'class="active"'; } ?>>
 				<a target="_blank" href="<?php echo $link->url (); ?>"><?php
 				$title = $link->title ();
 				if (!empty ($title)) {
@@ -17,12 +18,14 @@
 				?></a>
 				
 				<span class="desc<?php if ($link->priv ()) { echo ' private'; } ?>">
+					<?php if (!$active) { ?>
 					<a href="<?php echo Url::display (array ('c' => 'link', 'a' => 'update', 'params' => array ('id' => $link->id ()))); ?>">Éditer</a> - 
+					<?php } ?>
 					<span class="date">le <?php echo $link->date (true); ?></span>
 				<?php
 				$desc = $link->description ();
 				if (!empty ($desc)) {
-					echo ' - ' . $desc;
+					echo ' - ' . nl2br ($desc);
 				}
 				?>
 				</span>
@@ -48,14 +51,18 @@
 			<label for="desc">Description</label>
 			<textarea name="desc" id="desc"><?php echo $this->link->description (); ?></textarea>
 			
-			<span class="for_checkbox"><input type="checkbox" name="private" id="private" value="private" <?php if ($this->link->priv ()) { echo 'checked="checked"'; } ?> /></span>
-			<label for="private" class="for_checkbox">Privé ?</label>
+			<div class="checkbox_group">
+				<input type="checkbox" name="private" id="private" value="private" <?php if ($this->link->priv ()) { echo 'checked="checked"'; } ?> />
+				<label for="private">Privé ?</label>
+			</div>
 			
-			<span class="for_checkbox"><input type="checkbox" name="upDate" id="upDate" value="upDate" /></span>
-			<label for="upDate" class="for_checkbox">Mettre à jour la date</label>
+			<div class="checkbox_group">
+				<input type="checkbox" name="upDate" id="upDate" value="upDate" />
+				<label for="upDate">Mettre à jour la date</label>
+			</div>
 			
-			<a class="button delete" href="<?php echo Url::display (array ('c' => 'link', 'a' => 'delete', 'params' => array ('id' => $this->link->id ()))); ?>">Supprimer</a>
 			<input type="submit" value="Valider" />
+			<button class="delete" formaction="<?php echo Url::display (array ('c' => 'link', 'a' => 'delete', 'params' => array ('id' => $this->link->id ()))); ?>">Supprimer</button>
 		</form>
 	</div>
 	<?php } ?>
