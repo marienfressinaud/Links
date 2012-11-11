@@ -46,6 +46,13 @@ class Link extends Model {
 		$this->id = $id;
 	}
 	public function _title ($value) {
+		if (empty ($value)) {
+			$value = $this->url;
+		}
+		if (empty ($value)) {
+			$value = $this->description;
+		}
+		
 		$this->title = $value;
 	}
 	public function _url ($value) {

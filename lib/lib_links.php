@@ -23,11 +23,12 @@ function search_tags ($desc) {
 }
 
 function parse_args ($args) {
-	$url = false;
+	$url = '';
 	$desc = '';
 	$tags = array ();
+	$private = true;
 	
-	if ($args !== false && substr ($args, 0, 4) == 'http') {
+	if ($args && substr ($args, 0, 4) == 'http') {
 		$pos_fin_url = strpos ($args, ' ');
 		if ($pos_fin_url !== false) {
 			$url = substr ($args, 0, $pos_fin_url);
@@ -35,7 +36,6 @@ function parse_args ($args) {
 			$args = trim (substr ($args, $pos_fin_url));
 			
 			if ($args[strlen ($args) - 1] == '-') {
-				$private = true;
 				$args = trim (substr ($args, 0, -1));
 			} else {
 				$private = false;
@@ -47,6 +47,17 @@ function parse_args ($args) {
 		} else {
 			$url = $args;
 		}
+	} elseif ($args) {
+		$args = trim ($args);
+		if ($args[strlen ($args) - 1] == '-') {
+			$args = trim (substr ($args, 0, -1));
+		} else {
+			$private = false;
+		}
+	
+		$desc = $args;
+		
+		$tags = search_tags ($desc);
 	}
 
 	return array ($url, $desc, $tags, $private);

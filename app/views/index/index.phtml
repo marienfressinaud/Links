@@ -8,14 +8,13 @@
 			<?php foreach ($links as $link) { ?>
 			<?php $active = isset ($this->link) && $this->link->id () == $link->id (); ?>
 			<li <?php if ($active) { echo 'class="active"'; } ?>>
-				<a target="_blank" href="<?php echo $link->url (); ?>"><?php
-				$title = $link->title ();
-				if (!empty ($title)) {
-					echo $link->title ();
-				} else {
-					echo $link->url ();
-				}
-				?></a>
+				<?php $url = $link->url (); ?>
+				
+				<?php if (!empty ($url)) { ?>
+				<a target="_blank" href="<?php echo $url; ?>"><?php echo $link->title (); ?></a>
+				<?php } else { ?>
+				<a href=""><?php echo $link->title (); ?></a>
+				<?php } ?>
 				
 				<span class="desc<?php if ($link->priv ()) { echo ' private'; } ?>">
 					<?php if (!$active) { ?>
