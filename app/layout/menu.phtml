@@ -1,6 +1,10 @@
 <ul>
-	<li <?php if (Request::actionName () == 'index') { echo 'class="active"'; } ?>>
-		<a href="<?php echo Url::display (array ('a' => 'index')); ?>"><?php echo Translate::t ('see links'); ?></a>
+	<?php $mode = Request::param ('mode', 'public'); ?>
+	<li <?php if (Request::actionName () == 'index' && $mode == 'public') { echo 'class="active"'; } ?>>
+		<a href="<?php echo Url::display (array ()); ?>"><?php echo Translate::t ('see links'); ?></a>
+	</li>
+	<li <?php if (Request::actionName () == 'index' && $mode == 'private') { echo 'class="active"'; } ?>>
+		<a href="<?php echo Url::display (array ('params' => array ('mode' => 'private'))); ?>"><?php echo Translate::t ('only private'); ?></a>
 	</li>
 	<li <?php if (Request::actionName () == 'configuration') { echo 'class="active"'; } ?>>
 		<a href="<?php echo Url::display (array ('a' => 'configuration')); ?>">Paramétrer</a>

@@ -15,13 +15,13 @@ class apiController extends ActionController {
 		
 		$type = htmlspecialchars (Request::param ('type'));
 		if ($type == 'public') {
-			$get_private = false;
+			$mode = 1;
 		} else {
-			$get_private = true;
+			$mode = 0;
 		}
 		
 		$linkDAO = new LinkDAO ();
-		$links_tmp = array_reverse ($linkDAO->listLinks ($get_private));
+		$links_tmp = array_reverse ($linkDAO->listLinks ($mode));
 		$links = array ();
 		
 		$format = htmlspecialchars (Request::param ('format'));

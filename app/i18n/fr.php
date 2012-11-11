@@ -3,6 +3,7 @@ return array (
 	'see links'                        => 'Voir les liens',
 	'add link'                         => 'Ajouter un lien',
 	'no link'                          => 'Vous n\'avez pas enregistré de liens.',
+	'only private'                     => 'Liens privés uniquement',
 	
 	'url'                              => 'URL',
 	'title'                            => 'Titre',

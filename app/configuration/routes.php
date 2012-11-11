@@ -7,10 +7,22 @@ return array (
 		'action'     => 'index'
 	),
 	array (
+		'route'      => '/\?m=(private)&p=(\d+)',
+		'controller' => 'index',
+		'action'     => 'index',
+		'params'     => array ('mode', 'page')
+	),
+	array (
 		'route'      => '/\?p=(\d+)',
 		'controller' => 'index',
 		'action'     => 'index',
 		'params'     => array ('page')
+	),
+	array (
+		'route'      => '/\?m=(private)',
+		'controller' => 'index',
+		'action'     => 'index',
+		'params'     => array ('mode')
 	),
 	array (
 		'route'      => '/parametrage',

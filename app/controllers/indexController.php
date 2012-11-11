@@ -2,8 +2,15 @@
   
 class indexController extends ActionController {
 	public function indexAction () {
+		$mode = Request::param ('mode', 'public');
+		
 		$linkDAO = new LinkDAO ();
-		$links = array_reverse ($linkDAO->listLinks ());
+		if ($mode == 'private') {
+			$links = $linkDAO->listLinks (2);
+		} else {
+			$links = $linkDAO->listLinks (1);
+		}
+		$links = array_reverse ($links);
 		
 		//gestion pagination
 		try {
@@ -55,7 +62,7 @@ class indexController extends ActionController {
 	
 	public function exportAction () {
 		$linkDAO = new LinkDAO ();
-		$links = $linkDAO->listLinks ();
+		$links = $linkDAO->listLinks (0);
 		
 		$links_array = array ();
 		foreach ($links as $key => $link) {

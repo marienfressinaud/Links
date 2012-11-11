@@ -126,7 +126,12 @@ class LinkDAO extends Model_array {
 		$this->writeFile($this->array);
 	}
 	
-	public function listLinks ($get_private = true) {
+	/*
+	 * $mode = 0 => tous
+	 * $mode = 1 => publics seulement
+	 * $mode = 2 => privés seulement
+	 */
+	public function listLinks ($mode = 0) {
 		$list = $this->array;
 		$links = array ();
 		
@@ -134,13 +139,19 @@ class LinkDAO extends Model_array {
 			$list = array ();
 		}
 		
-		if (!$get_private) {
+		if ($mode == 2) {
+			foreach ($list as $key => $link) {
+				if ($link['private']) {
+					$links[$key] = $link;
+				}
+			}
+		} elseif ($mode == 1) {
 			foreach ($list as $key => $link) {
 				if (!$link['private']) {
 					$links[$key] = $link;
 				}
 			}
-		} else {
+		} elseif ($mode == 0) {
 			$links = $list;
 		}
 		
