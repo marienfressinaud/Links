@@ -42,7 +42,8 @@ class apiController extends ActionController {
 				$links[$id] = array ();
 				$links[$id]['title'] = $link->title ();
 				$links[$id]['content'] = $link->description ();
-				$links[$id]['date'] = $link->date ();
+				$links[$id]['date'] = linkdate2timestamp ($link->date ());
+				$links[$id]['lastUpdate'] = $link->lastUpdate ();
 				$links[$id]['tags'] = $link->tags ();
 				
 				$url = $link->url ();

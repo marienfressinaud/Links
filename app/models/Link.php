@@ -6,6 +6,7 @@ class Link extends Model {
 	private $url;
 	private $description;
 	private $linkdate;
+	private $lastUpdate;
 	private $tags;
 	private $private;
 	
@@ -34,6 +35,9 @@ class Link extends Model {
 		} else {
 			return $this->linkdate;
 		}
+	}
+	public function lastUpdate () {
+		return $this->lastUpdate;
 	}
 	public function tags () {
 		return $this->tags;
@@ -64,7 +68,18 @@ class Link extends Model {
 	public function _date ($value) {
 		$this->linkdate = $value;
 	}
+	public function _lastUpdate ($value) {
+		if (is_int (intval ($value)) && $value) {
+			$this->lastUpdate = $value;
+		} else {
+			$this->lastUpdate = linkdate2timestamp ($this->date ());
+		}
+	}
 	public function _tags ($value) {
+		if (!is_array ($value)) {
+			$value = array ($value);
+		}
+		
 		$this->tags = $value;
 	}
 	public function _private ($private) {
@@ -92,6 +107,7 @@ class Link extends Model {
 			'tags' => $this->tags (),
 			'title' => $this->title (),
 			'linkdate' => $this->date (),
+			'lastUpdate' => $this->lastUpdate (),
 			'private' => $this->priv ()
 		);
 	}
@@ -110,7 +126,7 @@ class LinkDAO extends Model_array {
 			$this->array[$id][$key] = $value;
 		}
 		
-		$this->writeFile($this->array);
+		$this->writeFile ($this->array);
 	}
 	
 	public function updateLink ($id, $values) {
@@ -118,12 +134,12 @@ class LinkDAO extends Model_array {
 			$this->array[$id][$key] = $value;
 		}
 		
-		$this->writeFile($this->array);
+		$this->writeFile ($this->array);
 	}
 	
 	public function deleteLink ($id) {
 		unset ($this->array[$id]);
-		$this->writeFile($this->array);
+		$this->writeFile ($this->array);
 	}
 	
 	/*
@@ -177,6 +193,7 @@ class HelperLink {
 			$liste[$key]->_id ($key);
 			$liste[$key]->_title ($dao['title']);
 			$liste[$key]->_date ($dao['linkdate']);
+			$liste[$key]->_lastUpdate ($dao['lastUpdate']);
 			$liste[$key]->_private ($dao['private']);
 		}
 

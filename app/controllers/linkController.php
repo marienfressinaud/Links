@@ -15,6 +15,7 @@ class linkController extends ActionController {
 					'title' => $link->title (),
 					'description' => $link->description (),
 					'linkdate' => date ('Ymd_His', time ()),
+					'lastUpdate' => time (),
 					'tags' => $link->tags (),
 					'private' => $link->priv ()
 				);
@@ -51,7 +52,8 @@ class linkController extends ActionController {
 					'title' => $title,
 					'description' => $desc,
 					'tags' => $tags,
-					'private' => $private
+					'private' => $private,
+					'lastUpdate' => time ()
 				);
 				
 				$upDate = Request::param ('upDate');
