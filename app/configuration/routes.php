@@ -7,7 +7,7 @@ return array (
 		'action'     => 'index'
 	),
 	array (
-		'route'      => '/\?m=(private)&p=(\d+)',
+		'route'      => '/\?m=(private|public)&p=(\d+)',
 		'controller' => 'index',
 		'action'     => 'index',
 		'params'     => array ('mode', 'page')
@@ -19,7 +19,7 @@ return array (
 		'params'     => array ('page')
 	),
 	array (
-		'route'      => '/\?m=(private)',
+		'route'      => '/\?m=(private|public)',
 		'controller' => 'index',
 		'action'     => 'index',
 		'params'     => array ('mode')

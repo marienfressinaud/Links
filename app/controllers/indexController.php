@@ -2,7 +2,8 @@
   
 class indexController extends ActionController {
 	public function indexAction () {
-		$mode = Request::param ('mode', 'public');
+		$mode = Request::param ('mode', Session::param('mode', 'public'));
+		Session::_param('mode', $mode);
 		
 		$linkDAO = new LinkDAO ();
 		if ($mode == 'private') {
