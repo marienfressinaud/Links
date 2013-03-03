@@ -1,0 +1,14 @@
+<div id="panel">
+	<?php $this->partial ('configurationPanel'); ?>
+
+	<div id="configuration">
+		<h2>Liens de l'API</h2>
+		<dl>
+			<dt>Récupérer les liens publics (format Uniflux)</dt>
+			<dd><a href="<?php echo Url::display(array('c' => 'api', 'a' => 'getLinks', 'params' => array('format' => 'uniflux', 'type' => 'public'))); ?>"><?php echo Url::display(array('c' => 'api', 'a' => 'getLinks', 'params' => array('format' => 'uniflux', 'type' => 'public'))); ?></a></dd>
+
+			<dt>Récupérer les liens publics (format Shaarli)</dt>
+			<dd><a href="<?php echo Url::display(array('c' => 'api', 'a' => 'getLinks', 'params' => array('format' => 'shaarli', 'type' => 'public'))); ?>"><?php echo Url::display(array('c' => 'api', 'a' => 'getLinks', 'params' => array('format' => 'shaarli', 'type' => 'public'))); ?></a></dd>
+		</dl>
+	</div>
+</div>

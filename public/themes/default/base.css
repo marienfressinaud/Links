@@ -9,6 +9,9 @@ html, body {
 a {
 	color: #000; text-decoration: none;
 	}
+	a:hover {
+		text-decoration: underline;
+	}
 
 ul {
 	list-style: none;
@@ -46,6 +49,12 @@ ul {
 		span.pagination span.current-page {
 			font-weight: bold; padding: 0 50px;
 			}
+dl {
+	padding: 0 0 0 30px;
+}
+	dl dd {
+		margin: 0 0 10px;
+	}
 h2 {
 	display: inline-block; min-height: 20px; width: 90%; padding: 15px 5%;
 	background: #aaa; color: #fff; font-weight: bold; text-align: center; line-height: 20px; vertical-align: top; word-wrap: break-word;

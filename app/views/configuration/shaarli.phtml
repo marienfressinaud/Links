@@ -1,14 +1,10 @@
 <div id="panel">
-	<div class="aside">
-		<ul>
-			<li class="active"><a href="">Import / Export Shaarli</a></li>
-		</ul>
-	</div>
+	<?php $this->partial ('configurationPanel'); ?>
 
 	<div id="configuration">
 		<form method="post" action="" enctype="multipart/form-data">
 			<h2>Export Shaarli</h2>
-			<button formaction="<?php echo Url::display (array ('a' => 'export')); ?>">Exporter au format Shaarli</button>
+			<button formaction="<?php echo Url::display (array ('c' => 'configuration', 'a' => 'export')); ?>">Exporter au format Shaarli</button>
 			
 			<h2>Import Shaarli</h2>
 			<label for="file">Fichier</label>

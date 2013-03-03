@@ -1,0 +1,10 @@
+<div class="aside">
+	<ul>
+		<li<?php echo Request::controllerName() == 'configuration' && Request::actionName() == 'shaarli' ? ' class="active"' : ''; ?>>
+			<a href="<?php echo Url::display(array('c' => 'configuration', 'a' => 'shaarli')); ?>">Import / Export Shaarli</a>
+		</li>
+		<li<?php echo Request::controllerName() == 'configuration' && Request::actionName() == 'api' ? ' class="active"' : ''; ?>>
+			<a href="<?php echo Url::display(array('c' => 'configuration', 'a' => 'api')); ?>">API</a>
+		</li>
+	</ul>
+</div>
