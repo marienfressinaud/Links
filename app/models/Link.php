@@ -26,8 +26,12 @@ class Link extends Model {
 	public function url () {
 		return $this->url;
 	}
-	public function description () {
-		return $this->description;
+	public function description ($raw = true) {
+		if ($raw) {
+			return $this->description;
+		} else {
+			return parse_tags(makeLinks($this->description));
+		}
 	}
 	public function date ($format = false) {
 		if ($format) {

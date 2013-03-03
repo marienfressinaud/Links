@@ -22,7 +22,7 @@
 					<?php } ?>
 					<span class="date">le <?php echo $link->date (true); ?></span>
 				<?php
-				$desc = $link->description ();
+				$desc = $link->description (false);
 				if (!empty ($desc)) {
 					echo ' - ' . nl2br ($desc);
 				}

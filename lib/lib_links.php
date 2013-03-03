@@ -62,3 +62,29 @@ function parse_args ($args) {
 
 	return array ($url, $desc, $tags, $private);
 }
+
+# Transform URL and e-mails into links
+function makeLinks($string) {
+	$string = preg_replace_callback('/\s?(http|https|ftp):(\/\/){0,1}([^\"\s]*)/i','splitUri',$string);
+	return $string;
+}
+
+# Split links, require for makeLinks
+function splitUri($matches) {
+	$uri = $matches[1].':'.$matches[2].$matches[3];
+	$t = parse_url($uri);
+	$link = $matches[3];
+
+	if (!empty($t['scheme'])) {
+		return ' <a href="'.$uri.'">'.$link.'</a>';
+	} else {
+		return $uri;
+	}
+}
+
+// parse la description pour ajouter les liens sur les tags
+function parse_tags ($desc) {
+	$desc_parse = preg_replace ('/#([\w\d]+)/i', '<a class="linktag" href="?addtag=\\1">\\1</a>', $desc);
+
+	return $desc_parse;
+}
