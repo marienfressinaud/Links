@@ -7,6 +7,6 @@
 		<a href="<?php echo Url::display (array ('params' => array ('mode' => 'private'))); ?>"><?php echo Translate::t ('only private'); ?></a>
 	</li>
 	<li <?php if (Request::actionName () == 'configuration') { echo 'class="active"'; } ?>>
-		<a href="<?php echo Url::display (array ('a' => 'configuration')); ?>">Paramétrer</a>
+		<a href="<?php echo Url::display (array ('a' => 'configuration')); ?>"><?php echo Translate::t ('options'); ?></a>
 	</li>
 </ul>
